@@ -1,0 +1,30 @@
+{
+  "name": "navinote-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "NaviNote Astra backend: one validated endpoint in front of the OpenAI Responses API.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/main.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint .",
+    "test": "node --test --test-reporter=spec \"test/**/*.test.ts\"",
+    "secret-scan": "node ../scripts/secret-scan.mjs",
+    "check": "npm run lint && npm run typecheck && npm test && npm run secret-scan",
+    "eval:banknotes": "node --env-file-if-exists=.env eval/evaluate-banknotes.ts"
+  },
+  "dependencies": {
+    "openai": "7.23.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "26.6.3",
+    "eslint": "10.11.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.70.1"
+  }
+}

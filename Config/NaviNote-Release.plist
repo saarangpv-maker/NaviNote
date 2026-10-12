@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!--
+  RELEASE. Merged into the generated Info.plist for the Release
+  configuration. No App Transport Security exceptions and no local-network
+  access. The production backend URL must be HTTPS (the app refuses
+  anything else in Release). It is empty until a production host exists,
+  so Astra is unavailable in Release builds for now.
+-->
+<dict>
+	<key>NaviNoteAstraBaseURL</key>
+	<string>$(NAVINOTE_ASTRA_BASE_URL)</string>
+</dict>
+</plist>

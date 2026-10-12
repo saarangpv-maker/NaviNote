@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NaviNote Test Receipts</title>
+<style>
+  :root { --paper: #ffffff; --ink: #000000; --page: #d9d9d9; --screen: #111111; --lcd: #8dff9a; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--page); color: var(--ink);
+    font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .slide { display: none; height: 100vh; align-items: center; justify-content: center; padding: 3vh 16px; }
+  .slide.active { display: flex; }
+  .receipt { background: var(--paper); color: var(--ink); width: min(92vw, 70vh);
+    padding: 3.5vh 5vh; font-size: min(4.2vh, 5vw); line-height: 1.45; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
+  .center { text-align: center; }
+  .small { font-size: 0.7em; }
+  .row { display: flex; justify-content: space-between; gap: 1em; }
+  .bold { font-weight: 800; }
+  .gap { height: 0.8em; }
+  .terminal { background: var(--screen); color: var(--lcd); width: min(92vw, 90vh);
+    padding: 6vh 4vh; text-align: center; border-radius: 3vh; }
+  .terminal .label { font-size: min(6vh, 7vw); }
+  .terminal .amount { font-size: min(16vh, 15vw); font-weight: 800; margin: 2vh 0; }
+  nav { position: fixed; bottom: 12px; left: 0; right: 0; display: flex; justify-content: center; gap: 10px;
+    font-family: -apple-system, system-ui, sans-serif; }
+  nav button { font-size: 16px; padding: 10px 18px; border-radius: 10px; border: 1px solid #444; background: #fff; color: #000; cursor: pointer; }
+  nav .info { background: #fff; color: #000; padding: 10px 14px; border-radius: 10px; font-size: 15px; }
+  body.clean nav { display: none; }
+</style>
+</head>
+<body>
+
+<!-- All receipts are invented test data. No real business or person. -->
+
+<section class="slide" data-expect="Total AED 31.50 (not subtotal, VAT, cash or change)">
+  <div class="receipt">
+    <div class="center bold">SAMPLE CAFE</div>
+    <div class="center small">TEST RECEIPT - NOT A REAL PURCHASE</div>
+    <div class="gap"></div>
+    <div>Tel: 04 000 0000</div>
+    <div>Date: 25/09/2026 &nbsp; 12:41</div>
+    <div class="gap"></div>
+    <div class="row"><span>Latte</span><span>18.00</span></div>
+    <div class="row"><span>Croissant</span><span>12.00</span></div>
+    <div class="gap"></div>
+    <div class="row"><span>Subtotal</span><span>30.00</span></div>
+    <div class="row"><span>VAT 5%</span><span>1.50</span></div>
+    <div class="row bold"><span>TOTAL AED</span><span>31.50</span></div>
+    <div class="gap"></div>
+    <div class="row"><span>Cash</span><span>50.00</span></div>
+    <div class="row"><span>Change</span><span>18.50</span></div>
+  </div>
+</section>
+
+<section class="slide" data-expect="Total 7.00 US dollars (not the $7.00 card line mistaken for anything else)">
+  <div class="receipt">
+    <div class="center bold">SAMPLE MARKET</div>
+    <div class="center small">TEST RECEIPT - NOT A REAL PURCHASE</div>
+    <div class="gap"></div>
+    <div>Order #4821</div>
+    <div class="gap"></div>
+    <div class="row"><span>Milk</span><span>$3.49</span></div>
+    <div class="row"><span>Bread</span><span>$2.99</span></div>
+    <div class="gap"></div>
+    <div class="row"><span>Subtotal</span><span>$6.48</span></div>
+    <div class="row"><span>Tax</span><span>$0.52</span></div>
+    <div class="row bold"><span>Total</span><span>$7.00</span></div>
+    <div class="gap"></div>
+    <div class="row"><span>VISA ****0000</span><span>$7.00</span></div>
+  </div>
+</section>
+
+<section class="slide" data-expect="Total 1,360 Kenyan shillings">
+  <div class="receipt">
+    <div class="center bold">SAMPLE SUPERMARKET</div>
+    <div class="center small">TEST RECEIPT - NOT A REAL PURCHASE</div>
+    <div class="gap"></div>
+    <div class="row"><span>Sugar 2kg</span><span>340.00</span></div>
+    <div class="row"><span>Rice 5kg</span><span>1,020.00</span></div>
+    <div class="gap"></div>
+    <div class="row bold"><span>TOTAL KSH</span><span>1,360.00</span></div>
+    <div class="gap"></div>
+    <div class="row"><span>CASH</span><span>2,000.00</span></div>
+    <div class="row"><span>CHANGE</span><span>640.00</span></div>
+  </div>
+</section>
+
+<section class="slide" data-expect="Total 42.00 with NO currency: NaviNote should ask you to choose one">
+  <div class="receipt">
+    <div class="center bold">SAMPLE SHOP</div>
+    <div class="center small">TEST RECEIPT - NOT A REAL PURCHASE</div>
+    <div class="gap"></div>
+    <div class="row"><span>Notebook</span><span>22.00</span></div>
+    <div class="row"><span>Pens</span><span>20.00</span></div>
+    <div class="gap"></div>
+    <div class="row bold"><span>TOTAL</span><span>42.00</span></div>
+  </div>
+</section>
+
+<section class="slide" data-expect="Payment-terminal screen: 25 dirhams">
+  <div class="terminal">
+    <div class="label">SALE</div>
+    <div class="amount">AED 25.00</div>
+    <div class="label">TEST SCREEN</div>
+  </div>
+</section>
+
+<section class="slide" data-expect="Two different totals: NaviNote should NOT propose anything (ambiguous)">
+  <div class="receipt">
+    <div class="center bold">SAMPLE BAKERY</div>
+    <div class="center small">TEST RECEIPT - NOT A REAL PURCHASE</div>
+    <div class="gap"></div>
+    <div class="row bold"><span>TOTAL AED</span><span>10.00</span></div>
+    <div class="row bold"><span>TOTAL AED</span><span>12.00</span></div>
+  </div>
+</section>
+
+<nav>
+  <button id="prev" aria-label="Previous receipt">&larr; Prev</button>
+  <span class="info" id="info"></span>
+  <button id="next" aria-label="Next receipt">Next &rarr;</button>
+  <button id="hide" aria-label="Hide these controls">Hide controls (H)</button>
+</nav>
+
+<script>
+  const slides = [...document.querySelectorAll('.slide')];
+  let index = 0;
+  function show(i) {
+    index = (i + slides.length) % slides.length;
+    slides.forEach((s, n) => s.classList.toggle('active', n === index));
+    document.getElementById('info').textContent =
+      `${index + 1}/${slides.length} — expect: ${slides[index].dataset.expect}`;
+  }
+  document.getElementById('prev').onclick = () => show(index - 1);
+  document.getElementById('next').onclick = () => show(index + 1);
+  document.getElementById('hide').onclick = () => document.body.classList.toggle('clean');
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') show(index + 1);
+    if (e.key === 'ArrowLeft') show(index - 1);
+    if (e.key.toLowerCase() === 'h') document.body.classList.toggle('clean');
+  });
+  show(0);
+</script>
+</body>
+</html>

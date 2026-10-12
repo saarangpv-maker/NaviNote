@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!--
+  DEBUG ONLY. Merged into the generated Info.plist for the Debug
+  configuration. Lets a development build reach the Astra backend running
+  on this Mac over the local network (plain HTTP to local addresses only).
+  The Release configuration uses NaviNote-Release.plist, which has none of
+  this. The URL is passed at build time, e.g.
+  NAVINOTE_ASTRA_BASE_URL=http://<your-mac>.local:8787, and is not committed.
+-->
+<dict>
+	<key>NaviNoteAstraBaseURL</key>
+	<string>$(NAVINOTE_ASTRA_BASE_URL)</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Development builds reach the NaviNote test server on this network.</string>
+</dict>
+</plist>
